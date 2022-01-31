@@ -1,19 +1,18 @@
-import javafx.application.Application;
-import javafx.scene.input.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
-import java.util.*;
+public class Board{
+    public static class Manager{
 
-public class TilesManager{
+        int rows, columns, i ,j;
+        static ArrayList[][] board;
+        ArrayList<String> colOptions = new ArrayList<>();
+        ArrayList<String> shapeOptions = new ArrayList<>();
+        ArrayList<String> elementOneColor = new ArrayList<>(20);
+        ArrayList<String> elementTwoColor = new ArrayList<>(20);
+        ArrayList<String> elementThreeShape = new ArrayList<>(20);
 
-    public static class Manager {
-        // Rows and Columns in the 2D array.
-        public static int rows;
-        public static int columns;
-        // The 2D Array.
-        public static ArrayList[][] board;
-        int i = 0;
-
-        //Constructor
         public Manager(int passedRows, int passedColumns){
             rows = passedRows;
             columns = passedColumns;
@@ -21,65 +20,51 @@ public class TilesManager{
         }
 
 
-        public void fill(int seed) {
-            // ArrayList to hold large square color choices.
-            ArrayList<String> colOptions = new ArrayList<>();
-            // Choices wanted. "colors".
+        public void fill(int seed){
+            Random random = new Random(seed);
             colOptions.add("R");
             colOptions.add("G");
             colOptions.add("B");
             colOptions.add("Y");
             colOptions.add("M");
-
-            //ArrayList to hold shape choices;
-            ArrayList<String> shapeOptions = new ArrayList<>();
-            // Choices wanted. "shapes".
             shapeOptions.add("Square");
             shapeOptions.add("Circle");
             shapeOptions.add("Ellipse");
 
-
-            // Random nums and the number of rows to generate.
-            Random random = new Random(seed);
-
-            ArrayList<String> colorChoicesOne = new ArrayList<>(20);
             i = 0;
             while (i < 10){
                 String x = colOptions.get(random.nextInt(colOptions.size()));
-                colorChoicesOne.add(x);
-                colorChoicesOne.add(x);
+                elementOneColor.add(x);
+                elementOneColor.add(x);
                 i++;
             }
-            Collections.shuffle(colorChoicesOne);
+            Collections.shuffle(elementOneColor);
 
-            ArrayList<String> colorChoicesTwo = new ArrayList<>(20);
             i = 0;
             while (i < 10){
                 String x = colOptions.get(random.nextInt(colOptions.size()));
-                colorChoicesTwo.add(x);
-                colorChoicesTwo.add(x);
+                elementTwoColor.add(x);
+                elementTwoColor.add(x);
                 i++;
             }
-            Collections.shuffle(colorChoicesTwo);
+            Collections.shuffle(elementTwoColor);
 
-            ArrayList<String> shapeChoices = new ArrayList<>(20);
             i = 0;
             while (i < 10){
                 String x = shapeOptions.get(random.nextInt(shapeOptions.size()));
-                shapeChoices.add(x);
-                shapeChoices.add(x);
+                elementThreeShape.add(x);
+                elementThreeShape.add(x);
                 i++;
             }
-            Collections.shuffle(shapeChoices);
+            Collections.shuffle(elementThreeShape);
 
-            // Fills in the 2D Array with an array of three characteristics.
             int counter = 0;
             for (i = 0; i < rows; i++) {
-                for (int j = 0; j < columns; j++) {
+                for (j = 0; j < columns; j++) {
                     ArrayList<String> hold = new ArrayList<>(3);
-                    hold.add(0, colorChoicesOne.get(counter));
-                    hold.add(1, colorChoicesTwo.get(counter));
-                    hold.add(2, shapeChoices.get(counter));
+                    hold.add(0, elementOneColor.get(counter));
+                    hold.add(1, elementTwoColor.get(counter));
+                    hold.add(2, elementThreeShape.get(counter));
                     counter++;
                     board[i][j] = hold;
                 }
@@ -115,16 +100,6 @@ public class TilesManager{
             }
             return holder.toString();
         }
-
-        public static void run(){
-            Manager boardOne = new Manager(4,5);
-            boardOne.fill(100);
-            GUI.main(board);
-
-            System.out.println(boardOne);
-        }
     }
-    public static void main(String[] args){
-        Manager.run();
-    }
+
 }
