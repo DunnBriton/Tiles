@@ -1,14 +1,17 @@
-import java.util.ArrayList;
-import java.util.Random;
+import javafx.application.Application;
+import javafx.scene.input.MouseEvent;
 
-public class TilesManager {
+import java.util.*;
+
+public class TilesManager{
 
     public static class Manager {
         // Rows and Columns in the 2D array.
-        int rows;
-        int columns;
+        public static int rows;
+        public static int columns;
         // The 2D Array.
-        private static ArrayList[][] board;
+        public static ArrayList[][] board;
+        int i = 0;
 
         //Constructor
         public Manager(int passedRows, int passedColumns){
@@ -17,43 +20,67 @@ public class TilesManager {
             board = new ArrayList[rows][columns];
         }
 
+
         public void fill(int seed) {
             // ArrayList to hold large square color choices.
-            ArrayList<String> larSquColChoices = new ArrayList<>();
+            ArrayList<String> colOptions = new ArrayList<>();
             // Choices wanted. "colors".
-            larSquColChoices.add("R");
-            larSquColChoices.add("G");
-            larSquColChoices.add("B");
-            larSquColChoices.add("Y");
-            larSquColChoices.add("M");
-
-            //ArrayList to hold small square color choices;
-            ArrayList<String> smaSquColChoices = new ArrayList<>();
-            // Choices wanted. "colors".
-            smaSquColChoices.add("R");
-            smaSquColChoices.add("G");
-            smaSquColChoices.add("B");
-            smaSquColChoices.add("Y");
-            smaSquColChoices.add("M");
+            colOptions.add("R");
+            colOptions.add("G");
+            colOptions.add("B");
+            colOptions.add("Y");
+            colOptions.add("M");
 
             //ArrayList to hold shape choices;
-            ArrayList<String> shapeChoices = new ArrayList<>();
+            ArrayList<String> shapeOptions = new ArrayList<>();
             // Choices wanted. "shapes".
-            shapeChoices.add("Square");
-            shapeChoices.add("Circle");
-            shapeChoices.add("Triangle");
+            shapeOptions.add("Square");
+            shapeOptions.add("Circle");
+            shapeOptions.add("Ellipse");
 
 
             // Random nums and the number of rows to generate.
             Random random = new Random(seed);
 
+            ArrayList<String> colorChoicesOne = new ArrayList<>(20);
+            i = 0;
+            while (i < 10){
+                String x = colOptions.get(random.nextInt(colOptions.size()));
+                colorChoicesOne.add(x);
+                colorChoicesOne.add(x);
+                i++;
+            }
+            Collections.shuffle(colorChoicesOne);
+
+            ArrayList<String> colorChoicesTwo = new ArrayList<>(20);
+            i = 0;
+            while (i < 10){
+                String x = colOptions.get(random.nextInt(colOptions.size()));
+                colorChoicesTwo.add(x);
+                colorChoicesTwo.add(x);
+                i++;
+            }
+            Collections.shuffle(colorChoicesTwo);
+
+            ArrayList<String> shapeChoices = new ArrayList<>(20);
+            i = 0;
+            while (i < 10){
+                String x = shapeOptions.get(random.nextInt(shapeOptions.size()));
+                shapeChoices.add(x);
+                shapeChoices.add(x);
+                i++;
+            }
+            Collections.shuffle(shapeChoices);
+
             // Fills in the 2D Array with an array of three characteristics.
-            for (int i = 0; i < rows; i++) {
+            int counter = 0;
+            for (i = 0; i < rows; i++) {
                 for (int j = 0; j < columns; j++) {
                     ArrayList<String> hold = new ArrayList<>(3);
-                    hold.add(0, larSquColChoices.get(random.nextInt(larSquColChoices.size())));
-                    hold.add(1, smaSquColChoices.get(random.nextInt(smaSquColChoices.size())));
-                    hold.add(2, shapeChoices.get(random.nextInt(shapeChoices.size())));
+                    hold.add(0, colorChoicesOne.get(counter));
+                    hold.add(1, colorChoicesTwo.get(counter));
+                    hold.add(2, shapeChoices.get(counter));
+                    counter++;
                     board[i][j] = hold;
                 }
             }
@@ -89,10 +116,15 @@ public class TilesManager {
             return holder.toString();
         }
 
-        public static void main(String[] args){
+        public static void run(){
             Manager boardOne = new Manager(4,5);
             boardOne.fill(100);
+            GUI.main(board);
+
             System.out.println(boardOne);
         }
+    }
+    public static void main(String[] args){
+        Manager.run();
     }
 }
