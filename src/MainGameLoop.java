@@ -6,5 +6,4 @@ public class MainGameLoop {
         Display.main();
         System.out.println(boardOne);
     }
-
 }

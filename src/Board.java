@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class Board{
     public static class Manager{
-
         int rows, columns, i ,j;
         static ArrayList[][] board;
         ArrayList<String> colOptions = new ArrayList<>();
@@ -18,7 +17,6 @@ public class Board{
             columns = passedColumns;
             board = new ArrayList[rows][columns];
         }
-
 
         public void fill(int seed){
             Random random = new Random(seed);
