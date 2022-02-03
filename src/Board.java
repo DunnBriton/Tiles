@@ -1,25 +1,46 @@
+/**
+ * Board
+ * CS 375-002
+ * @author Briton Dunn
+ * Board is called to create a gameboard for
+ *     the current iteration of the game.
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class Board{
     public static class Manager{
+        // Variables used for rows/columns and iteration.
         int rows, columns, i ,j;
         static ArrayList[][] board;
+        // ArrayLists of Strings used to store element options.
         ArrayList<String> colOptions = new ArrayList<>();
         ArrayList<String> shapeOptions = new ArrayList<>();
         ArrayList<String> elementOneColor = new ArrayList<>(20);
         ArrayList<String> elementTwoColor = new ArrayList<>(20);
         ArrayList<String> elementThreeShape = new ArrayList<>(20);
 
+        /**
+         * Manager assigns values to rows/columns/board.
+         * @param passedRows    - How many rows of tiles to make.
+         * @param passedColumns - How many columns of tiles to make.
+         */
         public Manager(int passedRows, int passedColumns){
             rows = passedRows;
             columns = passedColumns;
             board = new ArrayList[rows][columns];
         }
 
+        /**
+         * Main method. Creates board/gui/loop.
+         * @param seed - Value used to generate board values.
+         * Return void.
+         */
         public void fill(int seed){
+            // Creates random variable from seed.
             Random random = new Random(seed);
+            //Adds the options for elements to ArrayLists.
             colOptions.add("R");
             colOptions.add("G");
             colOptions.add("B");
@@ -29,6 +50,7 @@ public class Board{
             shapeOptions.add("Circle");
             shapeOptions.add("Ellipse");
 
+            //Adds color options for back square.
             i = 0;
             while (i < 10){
                 String x = colOptions.get(random.nextInt(colOptions.size()));
@@ -38,6 +60,7 @@ public class Board{
             }
             Collections.shuffle(elementOneColor);
 
+            //Adds color options for middle circle.
             i = 0;
             while (i < 10){
                 String x = colOptions.get(random.nextInt(colOptions.size()));
@@ -47,6 +70,7 @@ public class Board{
             }
             Collections.shuffle(elementTwoColor);
 
+            // Adds shape options for front shape.
             i = 0;
             while (i < 10){
                 String x = shapeOptions.get(random.nextInt(shapeOptions.size()));
@@ -56,6 +80,8 @@ public class Board{
             }
             Collections.shuffle(elementThreeShape);
 
+            /* Adds the selected elements to one ArrayList
+                   holding three elements per spot.*/
             int counter = 0;
             for (i = 0; i < rows; i++) {
                 for (j = 0; j < columns; j++) {
