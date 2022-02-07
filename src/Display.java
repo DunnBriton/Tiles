@@ -85,8 +85,8 @@ public class Display extends Application {
                     }
                     else{
                         if(selected == this){
+                            stack.getChildren().remove(selected);
                             stack.getChildren().remove(x);
-                            //stack.getChildren().remove(selected);
                             currentCombo++;
                         }
                         selected = null;
@@ -112,8 +112,8 @@ public class Display extends Application {
                     }
                     else{
                         if(selected == this){
+                            stack.getChildren().remove(selected);
                             stack.getChildren().remove(y);
-                            //stack.getChildren().remove(selected);
                             currentCombo++;
                         }
                         selected = null;
@@ -154,9 +154,10 @@ public class Display extends Application {
                     }
                     else{
                         if(selected == this){
+                            stack.getChildren().remove(selected);
                             stack.getChildren().remove(z);
-                            //stack.getChildren().remove(selected);
                             currentCombo++;
+
                         }
                         selected = null;
                         clickCount = 2;

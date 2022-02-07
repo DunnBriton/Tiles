@@ -22,7 +22,7 @@ public class Board{
         ArrayList<String> elementThreeShape = new ArrayList<>(20);
 
         /**
-         * Manager assigns values to rows/columns/board.
+         * Manager assigns values to row/columns/board.
          * @param passedRows    - How many rows of tiles to make.
          * @param passedColumns - How many columns of tiles to make.
          */

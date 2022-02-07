@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * MainGameLoop
  * CS 375-002
@@ -13,7 +15,8 @@ public class MainGameLoop {
      */
     public static void main(String[] args){
         Board.Manager boardOne = new Board.Manager(4,5);
-        boardOne.fill((int) Math.random());
+        Random rand = new Random();
+        boardOne.fill(rand.nextInt());
         Display.main();
         //Command to print gameboard to console if needed.
         //System.out.println(boardOne);
