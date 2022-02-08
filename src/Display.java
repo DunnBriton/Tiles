@@ -176,7 +176,7 @@ public class Display extends Application {
         mainPane.setLeft(labelOne);
         mainPane.setRight(labelTwo);
         tilePane.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
-        tilePane.setMaxSize(mainPane.getWidth() / 2, mainPane.getHeight() / 2);
+        tilePane.setMaxSize(mainPane.getWidth() , mainPane.getHeight() / 2);
 
         primaryStage.setScene(scene);
         primaryStage.show();
